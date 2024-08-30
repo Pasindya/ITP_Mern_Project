@@ -6,6 +6,8 @@ const Staff = require("../Model/StaffModel");
 const StaffControl = require("../Conrollers/StaffControl");
 
 router.get("/",StaffControl.getAllStaff);
+router.post("/",StaffControl.addStaff);
+
 
 //export
 module.exports = router;

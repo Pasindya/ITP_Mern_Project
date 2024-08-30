@@ -11,8 +11,10 @@ const app = express();
 app.use(express.json());
 
 // Apply the routers to their respective paths
+app.use(express.json());
 app.use("/bookings", bookingRouter);
 app.use("/staff", staffRouter);
+
 
 mongoose.connect("mongodb+srv://surfdeck:surfdeck1234@cluster0.kcpia.mongodb.net/")
     .then(() => console.log("Connected to MongoDB"))
