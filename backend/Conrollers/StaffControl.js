@@ -33,7 +33,30 @@ const addStaff = async (req,res,next) => {
     }
     return res.status(200).json({ staff });
 
+};
+
+//Get by id
+const getById = async (req,res,next) => {
+
+    const id = req.params.id;
+
+    let staff;
+
+    try {
+        staff = await Staff.findById(id);
+    }catch (err) {
+        console.log(err);
+    }
+    //not available users
+    if (!staff){
+        return res.status(404).json({message:"unable to add staff member"});
+
+    }
+    return res.status(200).json({ staff });
 }
+
+
 
 exports.getAllStaff = getAllStaff;
 exports.addStaff = addStaff;
+exports.getById = getById;

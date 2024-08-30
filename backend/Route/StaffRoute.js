@@ -7,6 +7,7 @@ const StaffControl = require("../Conrollers/StaffControl");
 
 router.get("/",StaffControl.getAllStaff);
 router.post("/",StaffControl.addStaff);
+router.get("/:id",StaffControl.getById);
 
 
 //export
