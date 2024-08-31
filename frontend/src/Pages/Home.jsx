@@ -23,7 +23,7 @@ export default function Home() {
         <p className="mt-4 text-slate-700 text-sm sm:text-base max-w-3xl mx-auto">
           At Surf Deck, we offer a range of surf lessons and packages designed for all levels. Our expert instructors will guide you through an unforgettable surfing experience in the beautiful waves of Arugambay.
         </p>
-        <Link to="/about" className="mt-8 inline-block bg-slate-900 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded">
+        <Link to="/aboutus" className="mt-8 inline-block bg-slate-900 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded">
           Learn More
         </Link>
       </section>
