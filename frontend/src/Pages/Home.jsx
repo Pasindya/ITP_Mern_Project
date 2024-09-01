@@ -37,7 +37,7 @@ export default function Home() {
             <div className="p-4">
               <h3 className="text-lg font-semibold text-slate-900">Beginner Package</h3>
               <p className="mt-2 text-slate-700 text-sm">Perfect for those new to surfing. Learn the basics with our experienced instructors.</p>
-              <Link to="/packages" className="mt-4 inline-block text-blue-600 hover:underline">Learn More</Link>
+              <Link to="/beginner" className="mt-4 inline-block text-blue-600 hover:underline">Learn More</Link>
             </div>
           </div>
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -45,7 +45,7 @@ export default function Home() {
             <div className="p-4">
               <h3 className="text-lg font-semibold text-slate-900">Intermediate Package</h3>
               <p className="mt-2 text-slate-700 text-sm">Take your surfing skills to the next level. Our intermediate package is designed for those with some experience.</p>
-              <Link to="/packages" className="mt-4 inline-block text-blue-600 hover:underline">Learn More</Link>
+              <Link to="/intermidiate" className="mt-4 inline-block text-blue-600 hover:underline">Learn More</Link>
             </div>
           </div>
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -53,7 +53,7 @@ export default function Home() {
             <div className="p-4">
               <h3 className="text-lg font-semibold text-slate-900">Advanced Package</h3>
               <p className="mt-2 text-slate-700 text-sm">Challenge yourself with our advanced surf lessons. Ideal for seasoned surfers looking to perfect their techniques.</p>
-              <Link to="/packages" className="mt-4 inline-block text-blue-600 hover:underline">Learn More</Link>
+              <Link to="/advanced" className="mt-4 inline-block text-blue-600 hover:underline">Learn More</Link>
             </div>
           </div>
         </div>
