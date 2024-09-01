@@ -13,8 +13,8 @@ import Footer from './Components/Footer';
 import Beginner from './Pages/Beginner';
 import Intermidiate from './Pages/Intermidiate';
 import Advanced from './Pages/Advanced';
-import Addlesson from './Backendpages/Addlesson';
 import Bookpackage from './Pages/Bookpackage';
+import Dashboard from './Backendpages/Dashboard/Dashboard';
 
 
 
@@ -39,7 +39,8 @@ export default function App() {
 
 
  
-  <Route path="/addlesson" element={< Addlesson/>} />
+  
+  <Route path="/dashboard" element={< Dashboard/>} />
     
     
 
