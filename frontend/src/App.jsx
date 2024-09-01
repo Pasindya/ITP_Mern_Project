@@ -10,6 +10,9 @@ import Supplier from './Pages/Supplier';
 import Signin from './Pages/Signin';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import Beginner from './Pages/Beginner';
+import Intermidiate from './Pages/Intermidiate';
+import Advanced from './Pages/Advanced';
 
 
 
@@ -27,6 +30,9 @@ export default function App() {
   <Route path="/equipments" element={< Equipments/>} />
   <Route path="/supplier" element={< Supplier/>} />
   <Route path="/signin" element={< Signin/>} />
+  <Route path="/beginner" element={< Beginner/>} />
+  <Route path="/intermidiate" element={< Intermidiate/>} />
+  <Route path="/advanced" element={< Advanced/>} />
     
     
 
