@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';  // Import Link from React Router
 
 export default function Intermediate() {
   return (
@@ -36,9 +37,11 @@ export default function Intermediate() {
       </ul>
 
       <div className="text-center mt-6">
-        <button className="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">
-          Book Now
-        </button>
+        <Link to="/bookpackage">  {/* Wrap the button with Link */}
+          <button className="bg-blue-500 text-white py-2 px-6 rounded hover:bg-blue-600 transition">
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
