@@ -8,18 +8,19 @@ import Payment from './Pages/Payment';
 import Equipments from './Pages/Equipments';
 import Supplier from './Pages/Supplier';
 import Signin from './Pages/Signin';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
 import Beginner from './Pages/Beginner';
 import Intermidiate from './Pages/Intermidiate';
 import Advanced from './Pages/Advanced';
+import Bookpackage from './Pages/Bookpackage';
+import AdminHome from './Dashboard/Adminhome';
+import Bookingdetails from './Booking/Bookingdetails';
 
 
 
 export default function App() {
   return <BrowserRouter>
   
- < Header/>
+ 
   <Routes>
   <Route path="/" element={< Home/>} />
   <Route path="/aboutus" element={< Aboutus/>} />
@@ -33,11 +34,23 @@ export default function App() {
   <Route path="/beginner" element={< Beginner/>} />
   <Route path="/intermidiate" element={< Intermidiate/>} />
   <Route path="/advanced" element={< Advanced/>} />
-    
+  <Route path="/bookpackage" element={< Bookpackage/>} />
+
+
+  <Route path="/adminhome" element={< AdminHome/>} />
+  <Route path="/bookingdetails" element={< Bookingdetails/>} />
+
+  
+ 
+ 
     
 
   </Routes>
+
+
  
-< Footer/>
+
+
+
   </BrowserRouter>;
 }
