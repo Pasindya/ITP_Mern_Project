@@ -48,6 +48,9 @@ export default function Footer() {
             <Link to="/Contact">
               <li className="hover:underline">Contact</li>
             </Link>
+            <Link to="/adminhome">
+              <li className="hover:underline">Dashboard</li>
+            </Link>
           </ul>
         </div>
 
