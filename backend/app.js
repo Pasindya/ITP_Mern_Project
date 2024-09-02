@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./Route/BookingRoute")
+const bookingRouter = require("./Route/BookingRoute")
+const paymentRouter = require("./Route/PaymentRoute");
 
 const app = express();
 
 //middleware
 app.use(express.json());
-app.use("/bookings",router);
+app.use("/bookings",bookingRouter);
+app.use("/payments",paymentRouter);
+
 
 
 
