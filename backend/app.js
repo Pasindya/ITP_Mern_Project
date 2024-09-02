@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 // Import routes with unique variable names
 const bookingRouter = require("./Route/BookingRoute");
 const staffRouter = require("./Route/StaffRoute");
+const studentRouter = require("./Route/StudentRoute");
 
 const app = express();
 
@@ -11,9 +12,12 @@ const app = express();
 app.use(express.json());
 
 // Apply the routers to their respective paths
-app.use(express.json());
+
+
 app.use("/bookings", bookingRouter);
 app.use("/staff", staffRouter);
+app.use("/student",studentRouter);
+
 
 
 mongoose.connect("mongodb+srv://surfdeck:surfdeck1234@cluster0.kcpia.mongodb.net/")
