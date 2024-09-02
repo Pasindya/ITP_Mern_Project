@@ -6,12 +6,13 @@ const bookingRouter = require("./Route/BookingRoute");
 const staffRouter = require("./Route/StaffRoute");
 
 const app = express();
+const cors = require("cors");
 
-// Middleware
-app.use(express.json());
 
-// Apply the routers to their respective paths
+
+// Middleweare
 app.use(express.json());
+app.use(cors());
 app.use("/bookings", bookingRouter);
 app.use("/staff", staffRouter);
 
