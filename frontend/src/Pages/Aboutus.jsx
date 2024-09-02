@@ -1,8 +1,13 @@
 import React from 'react';
+import Footer from '../Components/Footer';
+import Headernav from '../Components/Headernav';
+
 
 export default function Aboutus() {
   return (
     <div className="bg-white">
+    <Headernav/>
+
       {/* Hero Section */}
       <div className="relative bg-cover bg-center h-screen" style={{ backgroundImage: "url('public/images/back2.jpg')" }}>
         <img 
@@ -70,6 +75,8 @@ export default function Aboutus() {
         <p className="text-lg mb-12">Join our community and start your surfing adventure today!</p>
         <a href="/signup" className="bg-white text-blue-600 font-semibold py-4 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:-translate-y-1">Get Started</a>
       </div>
+
+      <Footer/>
     </div>
   );
 }
