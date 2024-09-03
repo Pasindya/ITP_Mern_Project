@@ -4,7 +4,7 @@ import axios from 'axios';
 import Bookingnav from './Bookingnav';
 import Booking from './Booking';
 
-const URL = "http://localhost:5001/bookings";
+const URL = "http://localhost:5003/bookings";
 
 const fetchHandler = async () => {
     try {

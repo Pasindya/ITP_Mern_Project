@@ -65,7 +65,7 @@ export default function Bookpackage() {
   };
 
   const sendRequest = async () => {
-    await axios.post("http://localhost:5001/bookings", {
+    await axios.post("http://localhost:5003/bookings", {
       name: String(inputs.name),
       packagename: String(inputs.packagename),
       email: String(inputs.email),

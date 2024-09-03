@@ -23,7 +23,7 @@ export default function UpdateBooking() {
 
   const sendRequest = async () => {
     try {
-      await axios.put(`http://localhost:5001/bookings/${id}`, {
+      await axios.put(`http://localhost:5003/bookings/${id}`, {
         name: String(inputs.name),
         packagename: String(inputs.packagename),
         email: String(inputs.email),
