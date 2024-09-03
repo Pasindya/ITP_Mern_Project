@@ -1,30 +1,37 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const shortid = require('shortid'); // Import shortid
 
 const staffSchema = new Schema({
+    _id: {
+        type: String,
+        default: function () {
+            return 'STM-' + shortid.generate(); // Prefix + unique ID
+        }
+    },
     name: {
         type: String,
-        required: true,  // Corrected typo: ture -> true
+        required: true,
     },
     gmail: {
         type: String,
-        required: true,  // Corrected typo: ture -> true
+        required: true,
     },
     age: {
         type: Number,
-        required: true,  // Corrected typo: ture -> true
+        required: true,
     },
     address: {
         type: String,
-        required: true,  // Corrected typo: ture -> true
+        required: true,
     },
-    experience: {  // Fixed typo: Expirince -> experience
+    experience: {
         type: Number,
-        required: true,  // Corrected typo: ture -> true
+        required: true,
     },
-    password: {  // Fixed capitalization: Password -> password
+    password: {
         type: String,
-        required: true,  // Corrected typo: ture -> true
+        required: true,
     },
 });
 
