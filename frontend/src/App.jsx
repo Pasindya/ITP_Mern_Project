@@ -14,6 +14,11 @@ import Advanced from './Pages/Advanced';
 import Bookpackage from './Pages/Bookpackage';
 import AdminHome from './Dashboard/Adminhome';
 import Bookingdetails from './Booking/Bookingdetails';
+import Viewbooking from './Booking/Viewbooking';
+import Booking from './Booking/Booking';
+import Updatebooking from './Booking/Updatebooking';
+import Bookingdescription from './Booking/Bookingdescription';
+
 
 
 
@@ -37,8 +42,17 @@ export default function App() {
   <Route path="/bookpackage" element={< Bookpackage/>} />
 
 
+
+
+
+
   <Route path="/adminhome" element={< AdminHome/>} />
   <Route path="/bookingdetails" element={< Bookingdetails/>} />
+  <Route path="/viewbooking" element={< Viewbooking/>} />
+  <Route path="/booking" element={< Booking/>} />
+  <Route path="/bookingdetails/:id" element={< Updatebooking/>} />
+  <Route path="/bookingdescription" element={< Bookingdescription/>} />
+  
 
   
  
