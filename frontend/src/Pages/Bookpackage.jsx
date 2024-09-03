@@ -1,204 +1,170 @@
 import React, { useState } from 'react';
-import Headernav from '../Components/Headernav'; // Import Headernav
-import Footer from '../Components/Footer'; // Import Footer
+import Footer from '../Components/Footer';
+import Headernav from '../Components/Headernav';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export default function BookPackage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    packageName: '',
-    email: '',
-    mobileNo: '',
-    address: ''
+export default function Bookpackage() {
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    name: "",
+    packagename: "",
+    email: "",
+    mobileno: "",
+    address: "",
   });
 
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    let formErrors = {};
-
-    // Name validation
-    if (!formData.name.trim()) {
-      formErrors.name = 'Name is required';
-    }
-
-    // Package name validation
-    if (!formData.packageName.trim()) {
-      formErrors.packageName = 'Package name is required';
-    }
-
-    // Email validation
-    if (!formData.email) {
-      formErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      formErrors.email = 'Email address is invalid';
-    }
-
-    // Mobile number validation
-    if (!formData.mobileNo.trim()) {
-      formErrors.mobileNo = 'Mobile number is required';
-    } else if (!/^\d{10}$/.test(formData.mobileNo)) {
-      formErrors.mobileNo = 'Mobile number is invalid';
-    }
-
-    // Address validation
-    if (!formData.address.trim()) {
-      formErrors.address = 'Address is required';
-    }
-
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
-  };
-
   const handleChange = (e) => {
-    const { id, value } = e.target;
+    const { name, value } = e.target;
 
-    // Restrict special characters and numbers in the name field
-    if (id === 'name') {
-      const filteredValue = value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces
-      setFormData({
-        ...formData,
-        [id]: filteredValue
-      });
-      return;
+    // Handle input restrictions
+    if (name === 'name' || name === 'packagename') {
+      // Allow only letters and spaces for name and package name
+      const filteredValue = value.replace(/[^a-zA-Z\s]/g, '');
+      setInputs((prevState) => ({
+        ...prevState,
+        [name]: filteredValue,
+      }));
+    } else if (name === 'mobileno') {
+      // Allow only numbers for mobile number
+      const filteredValue = value.replace(/[^0-9]/g, '');
+      setInputs((prevState) => ({
+        ...prevState,
+        [name]: filteredValue,
+      }));
+    } else {
+      setInputs((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-
-    // Restrict letters and special characters in the mobile number field
-    if (id === 'mobileNo') {
-      const filteredValue = value.replace(/[^\d]/g, ''); // Allow only numbers
-      setFormData({
-        ...formData,
-        [id]: filteredValue
-      });
-      return;
-    }
-
-    // Restrict numbers and special characters in the package name field
-    if (id === 'packageName') {
-      const filteredValue = value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces
-      setFormData({
-        ...formData,
-        [id]: filteredValue
-      });
-      return;
-    }
-
-    // Allow all characters for email and address fields
-    setFormData({
-      ...formData,
-      [id]: value
-    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      // Submit form data
-      console.log('Form data submitted:', formData);
-      // Reset form after submission
-      setFormData({
-        name: '',
-        packageName: '',
-        email: '',
-        mobileNo: '',
-        address: ''
-      });
-      setErrors({});
+    // Validate mobile number length
+    if (inputs.mobileno.length !== 10) {
+      alert("Mobile number must be exactly 10 digits long.");
+      return;
     }
+    try {
+      await sendRequest();
+      // Clear form fields
+      setInputs({
+        name: "",
+        packagename: "",
+        email: "",
+        mobileno: "",
+        address: "",
+      });
+      // Redirect to home page
+      navigate('/');
+    } catch (err) {
+      console.error("Error: ", err);
+    }
+  };
+
+  const sendRequest = async () => {
+    await axios.post("http://localhost:5001/bookings", {
+      name: String(inputs.name),
+      packagename: String(inputs.packagename),
+      email: String(inputs.email),
+      mobileno: Number(inputs.mobileno),
+      address: String(inputs.address),
+    });
   };
 
   return (
     <div>
-      {/* Header Component */}
-      <Headernav />
+      <Headernav /> {/* Include the Header */}
 
-      {/* Main Content */}
-      <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Book Your Package</h2>
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+          <h1 className="text-3xl font-bold mb-6 text-center">Book Now</h1>
+          
+          {/* Booking Form */}
           <form onSubmit={handleSubmit}>
             {/* Full Name */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2" htmlFor="name">Full Name</label>
+              <label className="block text-gray-700 font-medium" htmlFor="fullName">Full Name</label>
               <input
                 type="text"
-                id="name"
-                value={formData.name}
+                value={inputs.name}
+                name="name"
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500' : 'focus:ring-blue-500'}`}
+                className="mt-1 p-2 border border-gray-300 rounded w-full"
                 placeholder="Enter your full name"
+                required
               />
-              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
-
+            
             {/* Package Name */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2" htmlFor="packageName">Package Name</label>
+              <label className="block text-gray-700 font-medium" htmlFor="packageName">Package Name</label>
               <input
                 type="text"
-                id="packageName"
-                value={formData.packageName}
+                value={inputs.packagename}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.packageName ? 'border-red-500' : 'focus:ring-blue-500'}`}
-                placeholder="Enter the package name"
+                name="packagename"
+                className="mt-1 p-2 border border-gray-300 rounded w-full"
+                placeholder="Enter package name"
+                required
               />
-              {errors.packageName && <p className="text-red-500 text-sm mt-1">{errors.packageName}</p>}
             </div>
-
-            {/* Email Address */}
+            
+            {/* Email */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2" htmlFor="email">Email Address</label>
+              <label className="block text-gray-700 font-medium" htmlFor="email">Email</label>
               <input
                 type="email"
-                id="email"
-                value={formData.email}
+                name="email"
+                value={inputs.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.email ? 'border-red-500' : 'focus:ring-blue-500'}`}
-                placeholder="Enter your email address"
+                className="mt-1 p-2 border border-gray-300 rounded w-full"
+                placeholder="Enter your email"
+                required
               />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
             </div>
-
+            
             {/* Mobile Number */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2" htmlFor="mobileNo">Mobile Number</label>
+              <label className="block text-gray-700 font-medium" htmlFor="mobileNumber">Mobile Number</label>
               <input
                 type="tel"
-                id="mobileNo"
-                value={formData.mobileNo}
+                name="mobileno"
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.mobileNo ? 'border-red-500' : 'focus:ring-blue-500'}`}
+                value={inputs.mobileno}
+                className="mt-1 p-2 border border-gray-300 rounded w-full"
                 placeholder="Enter your mobile number"
+                required
               />
-              {errors.mobileNo && <p className="text-red-500 text-sm mt-1">{errors.mobileNo}</p>}
             </div>
-
+            
             {/* Address */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2" htmlFor="address">Address</label>
+              <label className="block text-gray-700 font-medium" htmlFor="address">Address</label>
               <textarea
-                id="address"
-                value={formData.address}
+                name="address"
+                value={inputs.address}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500' : 'focus:ring-blue-500'}`}
-                rows="3"
+                className="mt-1 p-2 border border-gray-300 rounded w-full"
                 placeholder="Enter your address"
-              ></textarea>
-              {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
+                required
+              />
             </div>
-
-            {/* Submit Button */}
+            
+            {/* Book Now Button */}
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
+              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
             >
-              Submit Booking
+              Book Now
             </button>
           </form>
         </div>
       </div>
 
-      {/* Footer Component */}
-      <Footer />
+      <Footer /> {/* Include the Footer */}
     </div>
   );
 }
