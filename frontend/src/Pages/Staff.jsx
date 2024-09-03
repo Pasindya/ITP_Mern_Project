@@ -2,6 +2,25 @@ import React from 'react';
 import Headernav from '../Components/Headernav';  // Adjust the path as needed
 import Footer from '../Components/Footer';        // Adjust the path as needed
 
+// Sample data for staff members
+const staffMembers = [
+  {
+    name: 'John Doe',
+    role: 'Lead Instructor',
+    contributions: 'John has been leading our surf classes for over 10 years. His expertise and enthusiasm are unmatched.',
+  },
+  {
+    name: 'Jane Smith',
+    role: 'Marketing Manager',
+    contributions: 'Jane handles all our marketing and outreach programs. Her innovative strategies have greatly increased our visibility.',
+  },
+  {
+    name: 'Emily Johnson',
+    role: 'Customer Support',
+    contributions: 'Emily ensures that our customers receive top-notch support and assistance. Her dedication is key to our high customer satisfaction.',
+  },
+];
+
 export default function Staff() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -20,12 +39,13 @@ export default function Staff() {
           </p>
 
           {/* Staff Details */}
-          <div className="mb-4">
-            <h3 className="text-2xl font-semibold mb-2">Team Member Name</h3>
-            <p className="text-gray-700">Details about the team member's role and contributions go here.</p>
-          </div>
-
-          {/* Add more staff details as needed */}
+          {staffMembers.map((member, index) => (
+            <div key={index} className="mb-6">
+              <h3 className="text-2xl font-semibold mb-2">{member.name}</h3>
+              <p className="text-gray-700 font-semibold">{member.role}</p>
+              <p className="text-gray-700 mt-2">{member.contributions}</p>
+            </div>
+          ))}
         </div>
       </main>
 
