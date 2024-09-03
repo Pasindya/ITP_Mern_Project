@@ -20,14 +20,16 @@ app.use(cors());
 app.use("/bookings", bookingRouter);
 app.use("/staff", staffRouter);
 
+ // Try a different port number
 
 // Connect to MongoDB and start the server
 mongoose.connect("mongodb+srv://surfdeck:surfdeck1234@cluster0.kcpia.mongodb.net/")
     .then(() => console.log("Connected to MongoDB"))
     .then(() => {
-        app.listen(5001, () => {
-            console.log("Server is running on port 5001");
-          });
-          
+        const PORT = process.env.PORT || 5003;  // Choose a new port
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
     })
     .catch((err) => console.log(err));
