@@ -1,119 +1,75 @@
-const BookingModel = require("../Model/BookingModel");
 const Booking = require("../Model/BookingModel");
 
-const getAllBookings = async (req, res, next) =>{
-
-    let getAllBookings;
-
-    try{
-        bookings = await Booking.find();
-    }catch (err){
-        console.log(err);
+const getAllBookings = async (req, res, next) => {
+    try {
+        const bookings = await Booking.find();
+        if (!bookings || bookings.length === 0) {
+            return res.status(404).json({ message: "No bookings found" });
+        }
+        return res.status(200).json({ bookings });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server Error" });
     }
-
-    //not found
-    if(!bookings){
-        return res.status(404).json({message:"BookingModel "})
-    }
-    //desplayed
-    return res.status(200).json({bookings});
-                                            
 };
 
+const addBookings = async (req, res, next) => {
+    const { name, packagename, email, mobileno, address } = req.body;
 
-//Insert data
-const addBookings = async (req, res,next) => {
-
-    const {name,packagename,email,mobileno,address} = req.body;
-
-    let bookings;
-
-    try{
-        bookings = new Booking({name,packagename,email,mobileno,address});
-        await bookings.save();
-    }catch(err){
-        console.log(err);
+    try {
+        const newBooking = new Booking({ name, packagename, email, mobileno, address });
+        await newBooking.save();
+        return res.status(201).json({ booking: newBooking });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Unable to add booking" });
     }
-
-    //not insert bookings
-
-    if(!bookings){
-        return res.status(404).json({message:"Unable to add bookings"});
-    }
-    return res.status(200).json({bookings});
 };
 
-//Get by Id
-const getById = async (req, res,next) => {
-
+const getById = async (req, res, next) => {
     const id = req.params.id;
 
-    let bookings
-
-    try{
-        bookings = await Booking.findById(id);
-    }catch (err) {
-        console.log(err);
+    try {
+        const booking = await Booking.findById(id);
+        if (!booking) {
+            return res.status(404).json({ message: "Booking not found" });
+        }
+        return res.status(200).json({ booking });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server Error" });
     }
-
-     //not available bookings
-
-     if(!bookings){
-        return res.status(404).json({message:"Booking not found"});
-    }
-    return res.status(200).json({bookings});
-   
 };
 
-//Update Booking details
-const updateBooking = async(req, res, next) => {
-
+const updateBooking = async (req, res, next) => {
     const id = req.params.id;
-    const {name,packagename,email,mobileno,address} = req.body;
+    const { name, packagename, email, mobileno, address } = req.body;
 
-    let bookings;
-
-    try{
-        bookings = await Booking.findByIdAndUpdate(id,
-            {name,packagename,email,mobileno,address});
-            bookings = await bookings.save();
-    }catch(err){
-        console.log(err);
+    try {
+        const booking = await Booking.findByIdAndUpdate(id, { name, packagename, email, mobileno, address }, { new: true });
+        if (!booking) {
+            return res.status(404).json({ message: "Unable to update booking details" });
+        }
+        return res.status(200).json({ booking });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server Error" });
     }
-
-    //not available bookings
-
-    if(!bookings){
-        return res.status(404).json({message:"Unable to update booking details"});
-    }
-    return res.status(200).json({bookings});
-   
-    
 };
 
-
-//Delete booking details
-
-const deleteBooking = async (req, res, next) =>{
- 
+const deleteBooking = async (req, res, next) => {
     const id = req.params.id;
 
-    let booking;
-
-    try{
-        booking = await Booking.findByIdAndDelete(id)
-    }catch (err){
-        console.log(err);
+    try {
+        const booking = await Booking.findByIdAndDelete(id);
+        if (!booking) {
+            return res.status(404).json({ message: "Unable to delete booking details" });
+        }
+        return res.status(200).json({ booking });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server Error" });
     }
-
-     //not available bookings
-
-     if(!booking){
-        return res.status(404).json({message:"Unable to Delete booking details"});
-    }
-    return res.status(200).json({booking});
-   
-
 };
 
 exports.getAllBookings = getAllBookings;

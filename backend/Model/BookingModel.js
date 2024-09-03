@@ -1,31 +1,34 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const shortid = require("shortid"); // You need to install shortid
 
 const bookingSchema = new Schema({
-    name:{
-        type:String,//dataType
-        required:true,//validate
+    _id: {
+        type: String,
+        default: function () {
+            return 'BOOK-' + shortid.generate(); // Prefix + unique ID
+        }
     },
-   packagename:{
-        type:String,//dataType
-        required:true,//validate
+    name: {
+        type: String,
+        required: true,
     },
-    email:{
-        type:String,//dataType
-        required:true,//validate
+    packagename: {
+        type: String,
+        required: true,
     },
-    mobileno:{
-        type:Number,//dataType
-        required:true,//validate
+    email: {
+        type: String,
+        required: true,
     },
-    
-    address:{
-        type:String,//dataType
-        required:true,//validate
+    mobileno: {
+        type: String, // Changed from Number to String
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
     }
 });
 
-module.exports = mongoose.model(
-    "BookingModel",//file name
-     bookingSchema//function name
-)
+module.exports = mongoose.model("Booking", bookingSchema);
