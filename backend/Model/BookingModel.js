@@ -6,7 +6,7 @@ const bookingSchema = new Schema({
     _id: {
         type: String,
         default: function () {
-            return 'BOOK-' + shortid.generate(); // Prefix + unique ID
+            return 'BK' + shortid.generate(); // Prefix + unique ID
         }
     },
     name: {
