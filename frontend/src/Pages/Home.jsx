@@ -1,24 +1,71 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 import Headernav from '../Components/Headernav';
 import Footer from '../Components/Footer';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Home() {
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    fade: true,
+    arrows: false,
+  };
+
   return (
     <div className="bg-white text-slate-900">
       <Headernav />
 
-      {/* Hero Section with Background Image */}
-      <section className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/p2.jpg')" }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="text-center text-white px-4 sm:px-8">
-            <h1 className="text-4xl sm:text-6xl font-bold mb-4">Welcome to Surf Deck</h1>
-            <p className="text-lg sm:text-xl mb-8">Your ultimate surfing companion at Arugambay</p>
-            <Link to="/packages" className="inline-block bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded">
-              Explore Packages
-            </Link>
+      {/* Hero Section with Auto-Slide Background Images */}
+      <section className="relative h-screen">
+        <Slider {...sliderSettings}>
+          <div>
+            <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('public/images/ho3.jpg')" }}>
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div className="text-center text-white px-4 sm:px-8">
+                  <h1 className="text-4xl sm:text-6xl font-bold mb-4">Welcome to Surf Deck</h1>
+                  <p className="text-lg sm:text-xl mb-8">Your ultimate surfing companion at Arugambay</p>
+                  <Link to="/packages" className="inline-block bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded">
+                    Explore Packages
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <div>
+            <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/p2.jpg')" }}>
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div className="text-center text-white px-4 sm:px-8">
+                  <h1 className="text-4xl sm:text-6xl font-bold mb-4">Surf with the Best</h1>
+                  <p className="text-lg sm:text-xl mb-8">Top-rated surf instructors and world-class waves.</p>
+                  <Link to="/packages" className="inline-block bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded">
+                    Explore Packages
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('public/images/ho1.jpg')" }}>
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div className="text-center text-white px-4 sm:px-8">
+                  <h1 className="text-4xl sm:text-6xl font-bold mb-4">Experience the Thrill</h1>
+                  <p className="text-lg sm:text-xl mb-8">Join us for an unforgettable adventure.</p>
+                  <Link to="/packages" className="inline-block bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded">
+                    Explore Packages
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Slider>
       </section>
 
       {/* About Section */}
